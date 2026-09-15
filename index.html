@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chanakya Kalyanaraman — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEEE9;
+    --paper-2:#E3E6DF;
+    --ink:#13233A;
+    --ink-soft:#2B3B52;
+    --teal:#1D6F70;
+    --brass:#B8862E;
+    --grey:#5B6570;
+    --red:#9E4B3D;
+    --rule:#C7CBC1;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    color:var(--ink);
+    line-height:1.12;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--teal);}
+  p{max-width:66ch;}
+  img{max-width:100%;display:block;}
+  .figure{margin:1.6rem 0;}
+  .figure img{border:1px solid var(--rule);background:#fff;}
+  .figure figcaption{font-size:.85rem;color:var(--grey);margin-top:.5rem;max-width:60ch;}
+
+  /* Layout shell */
+  .shell{display:flex;max-width:1400px;margin:0 auto;}
+  nav.rail{
+    position:sticky; top:0; align-self:flex-start;
+    width:230px; flex-shrink:0;
+    height:100vh;
+    padding:2.6rem 1.6rem;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border-right:1px solid var(--rule);
+  }
+  nav.rail .id .name{font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;line-height:1.25;}
+  nav.rail .id .role{font-size:.82rem;color:var(--grey);margin-top:.5rem;}
+  nav.rail ul{list-style:none;padding:0;margin:2.2rem 0 0 0;}
+  nav.rail li{margin-bottom:.85rem;}
+  nav.rail a{
+    color:var(--ink-soft); text-decoration:none; font-size:.92rem;
+    display:flex; gap:.6rem; align-items:baseline;
+  }
+  nav.rail a .num{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--brass);}
+  nav.rail a:hover{color:var(--teal);}
+  nav.rail .foot a{display:block;font-size:.82rem;color:var(--grey);margin-top:.35rem;}
+  nav.rail .foot{font-size:.82rem;}
+
+  main{flex:1; min-width:0;}
+  section{
+    padding:5.2rem clamp(1.6rem, 5vw, 5rem);
+    border-bottom:1px solid var(--rule);
+  }
+  section.hero{padding-top:4.2rem; padding-bottom:4.6rem;}
+
+  /* Hero */
+  .hero h1{font-size:clamp(2.4rem, 5vw, 3.4rem);}
+  .hero .tagline{font-size:1.18rem; color:var(--ink-soft); max-width:52ch; margin-top:.6rem;}
+  .instrument-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--rule); margin-top:2.6rem; border:1px solid var(--rule);
+  }
+  .instrument{background:var(--paper); padding:1.3rem 1.2rem;}
+  .instrument .stat{font-family:'IBM Plex Mono',monospace; font-size:1.7rem; font-weight:600; color:var(--teal);}
+  .instrument .stat.brass{color:var(--brass);}
+  .instrument .label{font-size:.78rem; color:var(--grey); margin-top:.35rem; line-height:1.35;}
+
+  /* Section headers */
+  .kicker{font-size:.85rem; color:var(--brass); font-family:'IBM Plex Mono',monospace; margin-bottom:.6rem;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch;}
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:1.8rem; margin:1.4rem 0 2.2rem 0;
+    padding:1rem 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  }
+  .meta-item .k{font-size:.72rem; color:var(--grey); text-transform:none;}
+  .meta-item .v{font-family:'IBM Plex Mono',monospace; font-size:.92rem; color:var(--ink);}
+
+  .cols{display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:start;}
+  .cols.reverse{grid-template-columns:.9fr 1.1fr;}
+  @media (max-width:880px){
+    .cols, .cols.reverse{grid-template-columns:1fr;}
+    nav.rail{display:none;}
+    .shell{display:block;}
+    section{padding:3.4rem 1.4rem;}
+    .instrument-row{grid-template-columns:1fr 1fr;}
+  }
+
+  .callout{
+    border-left:3px solid var(--teal); padding:.2rem 0 .2rem 1.1rem; margin:1.6rem 0;
+    color:var(--ink-soft);
+  }
+  .callout.brass{border-left-color:var(--brass);}
+  .callout .num{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--teal); font-size:1.05rem;}
+  .callout.brass .num{color:var(--brass);}
+
+  .finding{margin:1.5rem 0; padding:1.2rem 1.3rem; background:var(--paper-2); border:1px solid var(--rule);}
+  .finding h4{font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:.98rem; margin:0 0 .4rem 0; color:var(--ink);}
+  .finding .stat{font-family:'IBM Plex Mono',monospace; color:var(--teal); font-weight:600;}
+
+  .tag-row{display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0;}
+  .tag{font-size:.76rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); border:1px solid var(--rule); padding:.25rem .6rem; background:#fff;}
+
+  .scope-cols{display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; margin:1.6rem 0;}
+  .scope-box{padding:1rem 1.1rem; border:1px solid var(--rule); background:#fff;}
+  .scope-box.in{border-left:3px solid var(--teal);}
+  .scope-box.out{border-left:3px solid var(--red);}
+  .scope-box h4{font-size:.85rem; margin:0 0 .6rem 0; color:var(--grey); font-weight:600; font-family:'IBM Plex Sans',sans-serif;}
+  .scope-box ul{margin:0; padding-left:1.1rem; font-size:.9rem;}
+  .scope-box li{margin-bottom:.4rem;}
+  @media (max-width:640px){.scope-cols{grid-template-columns:1fr;}}
+
+  .btn{
+    display:inline-block; background:var(--ink); color:var(--paper); text-decoration:none;
+    padding:.7rem 1.3rem; font-size:.92rem; margin-top:.6rem; border:1px solid var(--ink);
+  }
+  .btn:hover{background:var(--teal); border-color:var(--teal);}
+  .btn.ghost{background:transparent; color:var(--ink); }
+  .btn.ghost:hover{color:var(--teal); border-color:var(--teal);}
+
+  footer{padding:3.4rem clamp(1.6rem,5vw,5rem); }
+  footer h2{font-size:1.6rem;}
+  footer .links{display:flex; gap:1.6rem; flex-wrap:wrap; margin-top:1.2rem;}
+  footer .links a{font-size:.95rem;}
+
+  .strip{overflow-x:auto; border:1px solid var(--rule); background:#0f0f10;}
+  .strip img{display:block;}
+
+  /* Slide carousel */
+  .carousel{
+    position:relative; max-width:320px; margin:0 auto;
+    background:#0f0f10; border:1px solid var(--rule);
+    padding:1.2rem 1.2rem 1rem;
+  }
+  .carousel .car-viewport{overflow:hidden; border-radius:2px;}
+  .carousel .car-track{display:flex; transition:transform .35s ease;}
+  .carousel .car-track img{flex:0 0 100%; width:100%; border:none; background:none;}
+  .carousel .car-controls{display:flex; align-items:center; justify-content:space-between; margin-top:.9rem;}
+  .carousel .car-btn{
+    background:transparent; border:1px solid #444; color:#ECEEE9; width:34px; height:34px;
+    border-radius:50%; cursor:pointer; font-size:1.15rem; line-height:1; padding:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .carousel .car-btn:hover{border-color:var(--brass); color:var(--brass);}
+  .carousel .car-counter{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#B7BCB4;}
+  .carousel-caption{text-align:center; font-size:.8rem; color:var(--grey); margin-top:.7rem;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="rail">
+    <div>
+      <div class="id">
+        <div class="name">Chanakya<br>Kalyanaraman <span style="font-size:.7em;color:var(--grey);font-weight:500;">(Chan)</span></div>
+        <div class="role">Supply Chain &amp; Operations Analyst</div>
+      </div>
+      <ul>
+        <li><a href="#coop"><span class="num">01</span> Demand &amp; Forecasting</a></li>
+        <li><a href="#cfd"><span class="num">02</span> Hydrofoil CFD</a></li>
+        <li><a href="#marketplace"><span class="num">03</span> Local Encounter</a></li>
+        <li><a href="#dissertation"><span class="num">04</span> MSc Dissertation</a></li>
+      </ul>
+    </div>
+    <div class="foot">
+      <a href="mailto:chanakya.kal@gmail.com">chanakya.kal@gmail.com</a>
+      <a href="https://www.linkedin.com/in/chanakya-kalyan/" target="_blank">LinkedIn ↗</a>
+      <a href="tel:+447818922075">+44 7818 922075</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero" id="top">
+      <h1>Chanakya Kalyanaraman <span style="font-size:.5em;color:var(--grey);font-weight:500;">(Chan)</span></h1>
+      <p class="tagline">Supply chain analyst with an engineering habit: build the model, test it against reality, then say plainly what the numbers mean. Aerospace Engineering, Warwick Business School.</p>
+      <p style="max-width:56ch; color:var(--ink-soft); margin-top:.9rem;">Currently working within Co-op's UK ambient distribution network in Coventry, alongside an MSc in Management at Warwick Business School. Background spans aerospace engineering, international manufacturing, and product management, four different fields, one consistent way of working through them. Open to Supply Chain, Operations, and Planning Analyst roles across the UK.</p>
+
+      <div class="instrument-row">
+        <div class="instrument">
+          <div class="stat">96.5%</div>
+          <div class="label">fewer World Cup stockouts, with event-aware planning vs naive forecasting</div>
+        </div>
+        <div class="instrument">
+          <div class="stat brass">−63.3%</div>
+          <div class="label">total drag reduction, canoe hydrofoil retrofit, validated by CFD</div>
+        </div>
+        <div class="instrument">
+          <div class="stat">r = .47</div>
+          <div class="label">correlation between emotional intelligence and metacognitive strategy, N=100</div>
+        </div>
+        <div class="instrument">
+          <div class="stat brass">30+</div>
+          <div class="label">screens designed and shipped end-to-end, from onboarding to admin verification</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECT 1: CO-OP ================= -->
+    <section id="coop">
+      <div class="kicker">01 — Data &amp; Analytics</div>
+      <div class="section-head">
+        <h2>Demand, Stock &amp; Forecasting: an Ambient Distribution Depot, Summer 2026</h2>
+        <p>A self-directed portfolio project modelling the ambient (room-temperature) distribution centre I currently work in at Co-op, built to demonstrate the actual work of a supply chain analyst: KPI tracking, root-cause investigation, and event-aware forecasting.</p>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><div class="k">Scale</div><div class="v">2,524 SKUs × 21 weeks</div></div>
+        <div class="meta-item"><div class="k">Real product data</div><div class="v">2,470 SKUs (98%)</div></div>
+        <div class="meta-item"><div class="k">Tools</div><div class="v">Excel, Python (data generation)</div></div>
+        <div class="meta-item"><div class="k">Network</div><div class="v">1 depot → 8 regional clusters</div></div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 style="font-size:1.2rem;">The question</h3>
+          <p>Summer 2026 carried two genuine shocks to the network: the FIFA World Cup, a demand spike anyone could see coming months in advance, and an unexplained pet food demand spike staff nicknamed "Christmas for the pets." The project asks a real analyst's question of both: <em>what could better planning have fixed, and what actually needed investigating instead?</em></p>
+
+          <h3 style="font-size:1.2rem; margin-top:1.8rem;">Built on real data, not invented numbers</h3>
+          <p>2,470 of the 2,524 product names are drawn directly from a real, public grocery dataset (Instacart's Market Basket Analysis, 49,694 products)<sup>1</sup>, sampled from the categories that genuinely match this depot's real ambient range, filtered for UK-appropriate naming. Only 54 SKUs (a restricted tobacco aisle and a small toys range, neither present in any grocery dataset) are reasonably invented, and labelled as such. The World Cup demand assumptions are calibrated against real reported UK retail figures (NielsenIQ, The Grocer, The Guardian, Asian Trader), cited in full in the workbook.</p>
+          <p style="font-size:.78rem;color:var(--grey);border-top:1px solid var(--rule);padding-top:.6rem;margin-top:1.2rem;max-width:60ch;">1. Instacart (2017). <em>The Instacart Online Grocery Shopping Dataset 2017</em>. Originally released for the Instacart Market Basket Analysis Kaggle competition. <a href="https://www.kaggle.com/datasets/psparks/instacart-market-basket-analysis" target="_blank">kaggle.com/datasets/psparks/instacart-market-basket-analysis</a></p>
+        </div>
+        <div>
+          <div class="figure">
+            <img src="assets/coop_stockout_chart.png" alt="Weekly stockout rate chart showing spikes during World Cup and pet food anomaly weeks">
+            <figcaption>Weekly stockout rate across the whole depot — two distinct, real spikes: the World Cup weeks and the unexplained pet food anomaly.</figcaption>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <h4>Finding 1 — The World Cup was largely preventable</h4>
+        <p>Naive forecasting (no knowledge of the tournament) produced a <span class="stat">29.0%</span> stockout rate during World Cup weeks. A forecast adjusted for the tournament's known dates, public knowledge months in advance, cut that to <span class="stat">1.0%</span>, and reduced total stockout units by <span class="stat">99.1%</span> (from 281,162 to 2,489 units).</p>
+      </div>
+      <div class="finding">
+        <h4>Finding 2 — Not every anomaly is a planning failure</h4>
+        <p>The pet food stockout rate held at <span class="stat">100%</span> for three weeks, whether or not the event-aware planning adjustment was applied. Because the spike was never foreseeable, no amount of better forecasting could have fixed it, it needed investigation, not a formula. That distinction is the actual point of the project.</p>
+      </div>
+      <div class="finding">
+        <h4>Finding 3 — Delivery performance degrades predictably with distance</h4>
+        <p>On-time delivery ranged from <span class="stat">94.5%</span> (Coventry &amp; West Midlands) down to <span class="stat">78.8%</span> (Scotland), a clean, distance-driven pattern rather than random variation.</p>
+      </div>
+
+      <div class="cols reverse" style="margin-top:2.4rem;">
+        <div>
+          <div class="figure">
+            <img src="assets/coop_planning_chart.png" alt="Bar chart comparing naive vs event-adjusted stockout units during World Cup weeks">
+            <figcaption>Stockout units during World Cup weeks: naive planning vs. a forecast adjusted for a known, foreseeable event.</figcaption>
+          </div>
+        </div>
+        <div>
+          <div class="figure">
+            <img src="assets/coop_region_chart.png" alt="Bar chart of on-time delivery rate by UK region">
+            <figcaption>On-time delivery rate by region — Scotland's longer routes show measurably higher risk.</figcaption>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn" href="assets/Coop_NDC_Summer2026_Demand_Forecasting_Project.xlsx" download>Download the full workbook (.xlsx)</a>
+    </section>
+
+    <!-- ================= PROJECT 2: CFD ================= -->
+    <section id="cfd">
+      <div class="kicker">02 — Aerospace Engineering</div>
+      <div class="section-head">
+        <h2>Performance Enhancement of Canoes Using Hydrofoil</h2>
+        <p>BTech major project, Aerospace Engineering, SRM Institute of Science and Technology. A CFD-driven study asking a simple question with a rigorous answer: can retrofitting a hydrofoil measurably cut drag and add lift to a sprint canoe?</p>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><div class="k">Tools</div><div class="v">SolidWorks, ANSYS Fluent</div></div>
+        <div class="meta-item"><div class="k">Turbulence model</div><div class="v">SST k-ω</div></div>
+        <div class="meta-item"><div class="k">Multiphase model</div><div class="v">VOF (air / water)</div></div>
+        <div class="meta-item"><div class="k">Mesh at convergence</div><div class="v">~10,000,000 cells</div></div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 style="font-size:1.2rem;">Method, grounded in real benchmarks</h3>
+          <p>Design speed was set to the actual K1 canoe sprint world record (37.446s over 200m → 5.33 m/s), not an arbitrary number. Before trusting any result, a mesh independence study confirmed the simulation had converged (&lt;1% change) at roughly 10 million cells.</p>
+          <p>Eight candidate NACA and Eppler airfoils were compared using real XFoil polar data at the actual operating Reynolds number (~1,000,000). NACA 4412 at 6° angle of attack won on efficiency (Cl/Cd), and was then sized against a real target lift requirement (843.66N, split across tandem foils) before being retrofitted and re-tested.</p>
+        </div>
+        <div class="figure">
+          <img src="assets/cfd_efficiency.png" alt="Chart comparing lift-to-drag efficiency of 7 candidate airfoils across angle of attack">
+          <figcaption>Efficiency (Cl/Cd) of 8 candidate airfoils vs. angle of attack — NACA 4412 wins clearly at 6°.</figcaption>
+        </div>
+      </div>
+
+      <div class="cols reverse" style="margin-top:1rem;">
+        <div class="figure">
+          <img src="assets/cfd_cad_initial.png" alt="CAD render of the initial canoe with athlete">
+          <figcaption>Initial canoe CAD, K1 hull (5.2m × 0.4m) with a 95th-percentile male athlete model.</figcaption>
+        </div>
+        <div class="figure">
+          <img src="assets/cfd_phase_contour.png" alt="Phase contour showing air in red and water in blue around the initial canoe">
+          <figcaption>Initial canoe phase contour (air: red, water: blue) — viscous drag visible in the hull's boundary layer.</figcaption>
+        </div>
+      </div>
+
+      <div class="finding" style="margin-top:2rem;">
+        <h4>Result — a large, validated performance gain</h4>
+        <p>Total drag fell <span class="stat">63.3%</span> (116.95N → 42.85N). Viscous drag, the dominant component before retrofitting, fell <span class="stat">98.2%</span> (49.81N → 0.87N) once the hull was lifted clear of the water. Total lift rose <span class="stat">75.3%</span> (236.50N → 414.59N).</p>
+      </div>
+
+      <div class="cols" style="margin-top:1.6rem;">
+        <div class="figure">
+          <img src="assets/cfd_cad_retrofit.png" alt="CAD render of the retrofitted canoe with tandem hydrofoils and struts">
+          <figcaption>Retrofitted canoe with tandem hydrofoils, upper winglets, and a 200mm strut, tuned to keep the foils clear of surface wave interference.</figcaption>
+        </div>
+        <div class="figure">
+          <img src="assets/cfd_pressure_contour.png" alt="Pressure contour on the retrofitted canoe hull and hydrofoils">
+          <figcaption>Retrofitted canoe pressure contour, hull fully clear of the water surface.</figcaption>
+        </div>
+      </div>
+
+      <div class="figure" style="max-width:640px;">
+        <img src="assets/cfd_mesh_study.png" alt="Three charts showing viscous drag, total lift and total drag converging as mesh cell count increases">
+        <figcaption>Mesh independence study — results stabilise to under 1% change beyond ~10 million cells, confirming the result isn't a meshing artefact.</figcaption>
+      </div>
+    </section>
+
+    <!-- ================= PROJECT 3: MARKETPLACE ================= -->
+    <section id="marketplace">
+      <div class="kicker">03 — Product Management</div>
+      <div class="section-head">
+        <h2>Local Encounter: a Two-Sided Travel Marketplace</h2>
+        <p>A full MVP scope, written as Product Manager, for a marketplace connecting travellers with verified local guides, built against the actual gap in today's travel platforms: standardised tours with no room for something personal, and guides stuck on informal, high-commission channels.</p>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><div class="k">Role</div><div class="v">Product Manager</div></div>
+        <div class="meta-item"><div class="k">Personas</div><div class="v">3 (Traveller, Guide, Family)</div></div>
+        <div class="meta-item"><div class="k">Core flow</div><div class="v">Search → Book → Pay → Chat → Review</div></div>
+        <div class="meta-item"><div class="k">Design</div><div class="v">30+ Figma screens</div></div>
+      </div>
+
+      <p>Three named use cases anchor the PRD in real behaviour rather than abstract requirements: <strong>Rachel</strong>, booking a cultural walk in Chennai; <strong>Arjun</strong>, a Jaipur guide managing bookings and earnings; and <strong>Sophie</strong>, clarifying safety details with her guide before a cycling tour.</p>
+
+      <div class="figure" style="max-width:420px;">
+        <img src="assets/le_onboarding.png" alt="Onboarding screen: Connect with the world">
+      </div>
+
+      <h3 style="font-size:1.15rem; margin-top:2.2rem;">Traveller journey</h3>
+      <p style="max-width:100%;">Onboarding through account creation, guide discovery, booking, payment, confirmation, in-app chat, live location sharing, and Emergency SOS, a deliberate safety-first inclusion, through to the traveller's own profile.</p>
+      <div class="carousel" data-slides="17">
+        <div class="car-viewport"><div class="car-track">
+          <img src="assets/slides/traveller_00.png" alt="Onboarding: Connect with the world">
+          <img src="assets/slides/traveller_01.png" alt="Onboarding: Verified guides, built-in safety">
+          <img src="assets/slides/traveller_02.png" alt="Onboarding: Book in minutes">
+          <img src="assets/slides/traveller_03.png" alt="Create your account">
+          <img src="assets/slides/traveller_04.png" alt="Sign up as Traveller">
+          <img src="assets/slides/traveller_05.png" alt="Location and weather context">
+          <img src="assets/slides/traveller_06.png" alt="Search results: Welcome Rachel">
+          <img src="assets/slides/traveller_07.png" alt="Guide profile card: Karan">
+          <img src="assets/slides/traveller_08.png" alt="Full guide profile with bio and languages">
+          <img src="assets/slides/traveller_09.png" alt="Booking and price breakdown">
+          <img src="assets/slides/traveller_10.png" alt="Payment method selection">
+          <img src="assets/slides/traveller_11.png" alt="Booking confirmed">
+          <img src="assets/slides/traveller_12.png" alt="Chat list">
+          <img src="assets/slides/traveller_13.png" alt="Chat detail with guide">
+          <img src="assets/slides/traveller_14.png" alt="Live location sharing">
+          <img src="assets/slides/traveller_15.png" alt="Emergency SOS">
+          <img src="assets/slides/traveller_16.png" alt="Traveller profile">
+        </div></div>
+        <div class="car-controls">
+          <button class="car-btn prev" aria-label="Previous slide">‹</button>
+          <div class="car-counter"><span class="cur">1</span> / <span class="total">17</span></div>
+          <button class="car-btn next" aria-label="Next slide">›</button>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.15rem; margin-top:2.2rem;">Guide journey</h3>
+      <p style="max-width:100%;">A parallel onboarding path into a working dashboard: bookings, an earnings tracker, and a verified profile guides can use to build trust with new travellers.</p>
+      <div class="carousel" data-slides="8">
+        <div class="car-viewport"><div class="car-track">
+          <img src="assets/slides/guide_00.png" alt="Onboarding: Meet real locals, not tour operators">
+          <img src="assets/slides/guide_01.png" alt="Onboarding: Verified guides, built-in safety">
+          <img src="assets/slides/guide_02.png" alt="Onboarding: Book in minutes">
+          <img src="assets/slides/guide_03.png" alt="Create your account as a Guide">
+          <img src="assets/slides/guide_04.png" alt="Sign up as Guide with verification">
+          <img src="assets/slides/guide_05.png" alt="My Bookings">
+          <img src="assets/slides/guide_06.png" alt="My Earnings dashboard">
+          <img src="assets/slides/guide_07.png" alt="Guide profile page">
+        </div></div>
+        <div class="car-controls">
+          <button class="car-btn prev" aria-label="Previous slide">‹</button>
+          <div class="car-counter"><span class="cur">1</span> / <span class="total">8</span></div>
+          <button class="car-btn next" aria-label="Next slide">›</button>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.15rem; margin-top:2.2rem;">Admin: guide verification</h3>
+      <p style="max-width:100%;">A city-by-city view of pending and approved guide applications, with per-applicant ID, selfie and video verification status, so trust is actively managed, not assumed.</p>
+      <div class="carousel" data-slides="3">
+        <div class="car-viewport"><div class="car-track">
+          <img src="assets/slides/admin_00.png" alt="Admin: applications by city, pending and approved counts">
+          <img src="assets/slides/admin_01.png" alt="Admin: guide application list with verification status">
+          <img src="assets/slides/admin_02.png" alt="Admin: individual application detail with approve or reject">
+        </div></div>
+        <div class="car-controls">
+          <button class="car-btn prev" aria-label="Previous slide">‹</button>
+          <div class="car-counter"><span class="cur">1</span> / <span class="total">3</span></div>
+          <button class="car-btn next" aria-label="Next slide">›</button>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.15rem; margin-top:2.4rem;">What stayed in the MVP, and what didn't</h3>
+      <p>Deliberate scoping is its own skill. Cutting the wrong features stalls a launch; cutting the right ones protects it.</p>
+      <div class="scope-cols">
+        <div class="scope-box in">
+          <h4>In scope</h4>
+          <ul>
+            <li>Browse &amp; book, with secure payment</li>
+            <li>Guide listing creation &amp; management</li>
+            <li>Bookings dashboard, both sides</li>
+            <li>Guide earnings page</li>
+            <li>In-app messaging, pre- and post-booking</li>
+            <li>Verified profiles, both personas</li>
+          </ul>
+        </div>
+        <div class="scope-box out">
+          <h4>Deliberately out</h4>
+          <ul>
+            <li>Dynamic / surge pricing</li>
+            <li>Group split payments</li>
+            <li>Gamification (badges, leaderboards)</li>
+            <li>AI-based traveller-guide matching</li>
+            <li>Third-party integrations (TripAdvisor, calendar sync)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.15rem; margin-top:2rem;">Open risks, named rather than hidden</h3>
+      <div class="tag-row">
+        <span class="tag">Payment gateway compliance cross-region</span>
+        <span class="tag">Guide KYC: manual vs automated</span>
+        <span class="tag">Cancellation &amp; refund policy</span>
+        <span class="tag">1:1-only messaging at MVP</span>
+        <span class="tag">No liability/insurance coverage yet</span>
+      </div>
+    </section>
+
+    <!-- ================= PROJECT 4: DISSERTATION ================= -->
+    <section id="dissertation">
+      <div class="kicker">04 — Academic Research</div>
+      <div class="section-head">
+        <h2>The Influence of Emotional Intelligence on the Cognitive Processes and Decision-Making of Startup Entrepreneurs</h2>
+        <p>MSc Management dissertation, Warwick Business School, awarded Distinction. A quantitative study of 100 startup founders testing whether Emotional Intelligence functions as a cognitive enabler, a risk moderator, and a coping resource, not just a vague, feel-good trait.</p>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item"><div class="k">Sample</div><div class="v">N = 100 founders</div></div>
+        <div class="meta-item"><div class="k">EI measure</div><div class="v">WLEIS, 16 items</div></div>
+        <div class="meta-item"><div class="k">Analysis</div><div class="v">SPSS v29, hierarchical regression</div></div>
+        <div class="meta-item"><div class="k">Supervisor</div><div class="v">Ms. Mahrokh Roknifard</div></div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 style="font-size:1.15rem;">Design</h3>
+          <p>A pragmatist, cross-sectional survey of founders one to seven years into their venture, recruited through professional networks and snowball referral. Reliability held across every scale used (Cronbach's α ≥ .82). Regression predictors were mean-centred before interaction terms were built, standard practice to guard against multicollinearity.</p>
+        </div>
+        <div class="figure">
+          <img src="assets/dissertation_flow.png" alt="Research design flow diagram: literature review through to synthesis">
+        </div>
+      </div>
+
+      <div class="finding">
+        <h4>Finding 1 — EI as a cognitive enabler</h4>
+        <p>EI correlated strongly with metacognitive strategies (<span class="stat">r = .47</span>, p &lt; .01). Higher-EI founders reflect and self-monitor more, direct support for an ability-based model of EI, not a diffuse personality trait.</p>
+      </div>
+      <div class="finding">
+        <h4>Finding 2 — EI moderates risk, it doesn't override it</h4>
+        <p>Hierarchical regression showed EI significantly moderates the link between risk perception and strategic choice (<span class="stat">β = .35</span>, p &lt; .01, explaining a further <span class="stat">8%</span> of variance). EI doesn't make founders more risk-seeking, it changes how risk gets translated into action, resolving a genuine contradiction in prior literature.</p>
+      </div>
+      <div class="finding">
+        <h4>Finding 3 — a counter-intuitive result on emotional labour</h4>
+        <p>EI correlated positively with <em>awareness</em> of emotional labour (<span class="stat">r = .31</span>, p &lt; .01). High-EI founders aren't less burdened by projecting confidence to investors and composure to staff, they're more attuned to that cost, which the dissertation argues is protective rather than draining.</p>
+      </div>
+
+      <div class="figure" style="max-width:520px; margin-top:2rem;">
+        <img src="assets/dissertation_industry.png" alt="Bar chart showing industry distribution of the 100 founders sampled">
+      </div>
+
+      <div class="callout brass">
+        <p><strong>Practical takeaway:</strong> EI functioned as a strategic asset in this sample, not a soft skill. Reflective practices (journaling, structured peer feedback) map directly onto the mechanism the data actually shows.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <h2>Get in touch</h2>
+  <p>Open to supply chain, logistics, and operations analyst roles across the UK.</p>
+  <div class="links">
+    <a href="mailto:chanakya.kal@gmail.com">chanakya.kal@gmail.com</a>
+    <a href="tel:+447818922075">+44 7818 922075</a>
+    <a href="https://www.linkedin.com/in/chanakya-kalyan/" target="_blank">LinkedIn ↗</a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.carousel').forEach(function(car){
+  var track = car.querySelector('.car-track');
+  var slides = track.children;
+  var curEl = car.querySelector('.car-counter .cur');
+  var idx = 0;
+  function update(){
+    track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+    curEl.textContent = idx + 1;
+  }
+  car.querySelector('.prev').addEventListener('click', function(){
+    idx = (idx - 1 + slides.length) % slides.length;
+    update();
+  });
+  car.querySelector('.next').addEventListener('click', function(){
+    idx = (idx + 1) % slides.length;
+    update();
+  });
+  update();
+});
+</script>
+</body>
+</html>
